@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class TestController extends Controller
+{
+    public function test(Request $request)
+    {
+        return response()->json([
+            'success' => true,
+            'message' => 'API fonctionne',
+            'user' => $request->user(),
+            'authenticated' => $request->user() ? true : false
+        ]);
+    }
+}
