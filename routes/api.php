@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\TestController;
-
+use App\Http\Controllers\Api\ImageController;
 
 // Routes test
 Route::middleware('auth:sanctum')->get('/test', [TestController::class, 'test']);
@@ -53,4 +53,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products', [ProductController::class, 'store']);
     Route::put('/products/{id}', [ProductController::class, 'update']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+
+    // Upload d'images
+    Route::post('/upload-image', [ImageController::class, 'upload']);
+    Route::post('/delete-image', [ImageController::class, 'delete']);
 });

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProductController extends Controller
 {
@@ -70,33 +72,42 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'image' => 'nullable|string',
-        ]);
+{
+    $request->validate([
+        'category_id' => 'required|exists:categories,id',
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'price' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+    ]);
 
-        $product = Product::create([
-            'category_id' => $request->category_id,
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'description' => $request->description,
-            'price' => $request->price,
-            'stock' => $request->stock,
-            'image' => $request->image,
-            'is_active' => $request->get('is_active', true),
-        ]);
+    $imagePath = null;
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Produit créé avec succès',
-            'data' => $product
-        ], 201);
+    // Upload de l'image si présente
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+        $imagePath = $image->storeAs('products', $imageName, 'public');
     }
+
+    $product = Product::create([
+        'category_id' => $request->category_id,
+        'name' => $request->name,
+        'slug' => Str::slug($request->name),
+        'description' => $request->description,
+        'price' => $request->price,
+        'stock' => $request->stock,
+        'image' => $imagePath,
+        'is_active' => $request->get('is_active', true),
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Produit créé avec succès',
+        'data' => $product
+    ], 201);
+}
 
     public function update(Request $request, $id)
     {

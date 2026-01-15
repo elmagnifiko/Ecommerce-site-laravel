@@ -26,6 +26,7 @@ class ProductSeeder extends Seeder
         }
 
         // Création des 10 produits manuels
+        // Assurez-vous que vos images sont dans storage/app/public/products/
         $products = [
             [
                 'name' => 'Laptop HP',
@@ -34,7 +35,7 @@ class ProductSeeder extends Seeder
                 'price' => 350000,
                 'stock' => 10,
                 'category_slug' => 'electronics',
-                'image' => 'https://picsum.photos/200/200?random=1'
+                'image' => 'storage/products/laptop-hp.jpg'  // Remplacez par votre photo
             ],
             [
                 'name' => 'iPhone 13',
@@ -43,7 +44,7 @@ class ProductSeeder extends Seeder
                 'price' => 450000,
                 'stock' => 5,
                 'category_slug' => 'electronics',
-                'image' => 'https://picsum.photos/200/200?random=2'
+                'image' => 'storage/products/iphone-13.jpg'  // Remplacez par votre photo
             ],
             [
                 'name' => 'Sneakers Nike',
@@ -52,7 +53,7 @@ class ProductSeeder extends Seeder
                 'price' => 70000,
                 'stock' => 20,
                 'category_slug' => 'fashion',
-                'image' => 'https://picsum.photos/200/200?random=3'
+                'image' => 'storage/products/sneakers-nike.jpg'  // Remplacez par votre photo
             ],
             [
                 'name' => 'T-shirt Basic',
@@ -61,7 +62,7 @@ class ProductSeeder extends Seeder
                 'price' => 15000,
                 'stock' => 50,
                 'category_slug' => 'fashion',
-                'image' => 'https://picsum.photos/200/200?random=4'
+                'image' => 'storage/products/tshirt-basic.jpg'  // Remplacez par votre photo
             ],
             [
                 'name' => 'Laravel Book',
@@ -70,7 +71,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 30,
                 'category_slug' => 'books',
-                'image' => 'https://picsum.photos/200/200?random=5'
+                'image' => 'storage/products/laravel-book.jpg'  // Remplacez par votre photo
             ],
             [
                 'name' => 'Toy Car',
@@ -79,7 +80,7 @@ class ProductSeeder extends Seeder
                 'price' => 12000,
                 'stock' => 40,
                 'category_slug' => 'toys',
-                'image' => 'https://picsum.photos/200/200?random=6'
+                'image' => 'storage/products/toy-car.jpg'  // Remplacez par votre photo
             ],
             [
                 'name' => 'Office Chair',
@@ -88,7 +89,7 @@ class ProductSeeder extends Seeder
                 'price' => 80000,
                 'stock' => 10,
                 'category_slug' => 'furniture',
-                'image' => 'https://picsum.photos/200/200?random=7'
+                'image' => 'storage/products/office-chair.jpg'  // Remplacez par votre photo
             ],
             [
                 'name' => 'Dining Table',
@@ -97,7 +98,7 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'stock' => 5,
                 'category_slug' => 'furniture',
-                'image' => 'https://picsum.photos/200/200?random=8'
+                'image' => 'storage/products/dining-table.jpg'  // Remplacez par votre photo
             ],
             [
                 'name' => 'Puzzle 1000 pcs',
@@ -106,7 +107,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 10,
                 'category_slug' => 'toys',
-                'image' => 'https://picsum.photos/200/200?random=9'
+                'image' => 'storage/products/puzzle-1000.jpg'  // Remplacez par votre photo
             ],
             [
                 'name' => 'PHP Book',
@@ -115,7 +116,7 @@ class ProductSeeder extends Seeder
                 'price' => 15000,
                 'stock' => 25,
                 'category_slug' => 'books',
-                'image' => 'https://picsum.photos/200/200?random=10'
+                'image' => 'storage/products/php-book.jpg'  // Remplacez par votre photo
             ],
         ];
 

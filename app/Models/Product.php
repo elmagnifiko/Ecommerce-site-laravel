@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -39,4 +40,14 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    protected $appends = ['image_url'];
+
+public function getImageUrlAttribute()
+{
+    if ($this->image) {
+        return asset('storage/' . $this->image);
+    }
+    return null;
+}
 }
