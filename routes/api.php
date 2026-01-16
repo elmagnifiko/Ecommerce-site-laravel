@@ -47,6 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Admin - Catégories
     Route::post('/categories', [CategoryController::class, 'store']);
     Route::put('/categories/{id}', [CategoryController::class, 'update']);
+    Route::get('/products/category/{categoryId}', [ProductController::class, 'byCategory']);
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
     
     // Admin - Produits
@@ -57,4 +58,5 @@ Route::middleware('auth:sanctum')->group(function () {
     // Upload d'images
     Route::post('/upload-image', [ImageController::class, 'upload']);
     Route::post('/delete-image', [ImageController::class, 'delete']);
+    Route::get('/images/{filename}', [ImageController::class, 'show'])->name('image.show');
 });
