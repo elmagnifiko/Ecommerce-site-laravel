@@ -35,7 +35,7 @@ class ProductSeeder extends Seeder
                 'price' => 350000,
                 'stock' => 10,
                 'category_slug' => 'electronics',
-                'image' => 'storage/products/laptop-hp.jpg'  // Remplacez par votre photo
+                'image' => 'products/laptop-hp.jpg'
             ],
             [
                 'name' => 'iPhone 13',
@@ -44,7 +44,7 @@ class ProductSeeder extends Seeder
                 'price' => 450000,
                 'stock' => 5,
                 'category_slug' => 'electronics',
-                'image' => 'storage/products/iphone-13.jpg'  // Remplacez par votre photo
+                'image' => 'products/iphone-13.jpg'
             ],
             [
                 'name' => 'Sneakers Nike',
@@ -53,7 +53,7 @@ class ProductSeeder extends Seeder
                 'price' => 70000,
                 'stock' => 20,
                 'category_slug' => 'fashion',
-                'image' => 'storage/products/sneakers-nike.jpg'  // Remplacez par votre photo
+                'image' => 'products/sneakers-nike.jpg'
             ],
             [
                 'name' => 'T-shirt Basic',
@@ -62,7 +62,7 @@ class ProductSeeder extends Seeder
                 'price' => 15000,
                 'stock' => 50,
                 'category_slug' => 'fashion',
-                'image' => 'storage/products/tshirt-basic.jpg'  // Remplacez par votre photo
+                'image' => 'products/tshirt-basic.jpg'
             ],
             [
                 'name' => 'Laravel Book',
@@ -71,7 +71,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 30,
                 'category_slug' => 'books',
-                'image' => 'storage/products/laravel-book.jpg'  // Remplacez par votre photo
+                'image' => 'products/laravel-book.jpg'
             ],
             [
                 'name' => 'Toy Car',
@@ -80,7 +80,7 @@ class ProductSeeder extends Seeder
                 'price' => 12000,
                 'stock' => 40,
                 'category_slug' => 'toys',
-                'image' => 'storage/products/toy-car.jpg'  // Remplacez par votre photo
+                'image' => 'products/toy-car.jpg'
             ],
             [
                 'name' => 'Office Chair',
@@ -89,7 +89,7 @@ class ProductSeeder extends Seeder
                 'price' => 80000,
                 'stock' => 10,
                 'category_slug' => 'furniture',
-                'image' => 'storage/products/office-chair.jpg'  // Remplacez par votre photo
+                'image' => 'products/office-chair.jpg'
             ],
             [
                 'name' => 'Dining Table',
@@ -98,7 +98,7 @@ class ProductSeeder extends Seeder
                 'price' => 120000,
                 'stock' => 5,
                 'category_slug' => 'furniture',
-                'image' => 'storage/products/dining-table.jpg'  // Remplacez par votre photo
+                'image' => 'products/dining-table.jpg'
             ],
             [
                 'name' => 'Puzzle 1000 pcs',
@@ -107,7 +107,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 10,
                 'category_slug' => 'toys',
-                'image' => 'storage/products/puzzle-1000.jpg'  // Remplacez par votre photo
+                'image' => 'products/puzzle-1000.jpg'
             ],
             [
                 'name' => 'PHP Book',
@@ -116,7 +116,7 @@ class ProductSeeder extends Seeder
                 'price' => 15000,
                 'stock' => 25,
                 'category_slug' => 'books',
-                'image' => 'storage/products/php-book.jpg'  // Remplacez par votre photo
+                'image' => 'products/php-book.jpg'
             ],
         ];
 
