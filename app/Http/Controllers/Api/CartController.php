@@ -15,14 +15,27 @@ class CartController extends Controller
             ->where('user_id', $request->user()->id)
             ->get();
 
-        $total = $cartItems->sum(function ($item) {
-            return $item->product->price * $item->quantity;
+        $items = $cartItems->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'product_id' => $item->product_id,
+                'product' => [
+                    'id' => $item->product->id,
+                    'name' => $item->product->name,
+                    'price' => $item->product->price,
+                    'image' => $item->product->image
+                ],
+                'quantity' => $item->quantity,
+                'subtotal' => $item->product->price * $item->quantity
+            ];
         });
+
+        $total = $items->sum('subtotal');
 
         return response()->json([
             'success' => true,
             'data' => [
-                'items' => $cartItems,
+                'items' => $items,
                 'total' => $total,
                 'count' => $cartItems->sum('quantity')
             ]
@@ -104,7 +117,12 @@ class CartController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Panier mis à jour',
-            'data' => $cartItem->load('product')
+            'data' => [
+                'id' => $cartItem->id,
+                'product_id' => $cartItem->product_id,
+                'quantity' => $cartItem->quantity,
+                'subtotal' => $cartItem->product->price * $cartItem->quantity
+            ]
         ]);
     }
 

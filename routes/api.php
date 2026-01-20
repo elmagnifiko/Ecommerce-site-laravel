@@ -31,6 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Auth
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'user']);
+    Route::put('/user', [AuthController::class, 'updateProfile']);
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
     
     // Panier
     Route::get('/cart', [CartController::class, 'index']);
@@ -47,7 +49,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // Admin - Catégories
     Route::post('/categories', [CategoryController::class, 'store']);
     Route::put('/categories/{id}', [CategoryController::class, 'update']);
-    Route::get('/products/category/{categoryId}', [ProductController::class, 'byCategory']);
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
     
     // Admin - Produits

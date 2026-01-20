@@ -12,8 +12,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->statefulApi();
-        
         // Ajouter le middleware pour forcer JSON sur les routes API
         $middleware->api(prepend: [
             \App\Http\Middleware\ForceJsonResponse::class,
