@@ -59,5 +59,4 @@ Route::middleware('auth:sanctum')->group(function () {
     // Upload d'images
     Route::post('/upload-image', [ImageController::class, 'upload']);
     Route::post('/delete-image', [ImageController::class, 'delete']);
-    Route::get('/images/{filename}', [ImageController::class, 'show'])->name('image.show');
 });

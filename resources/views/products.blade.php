@@ -1,32 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Accueil - E-Commerce')
+@section('title', 'Tous les Produits - E-Commerce')
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" x-data="productList()">
-    <!-- Hero Section -->
-    <div class="relative bg-gradient-to-br from-orange-500 via-orange-600 to-red-600 rounded-3xl p-8 md:p-16 mb-12 text-white overflow-hidden shadow-2xl">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full -ml-48 -mb-48"></div>
-        <div class="relative z-10">
-            <h1 class="text-5xl md:text-6xl font-black mb-6 leading-tight">Bienvenue sur<br><span class="text-orange-200">ShopZone</span></h1>
-            <p class="text-2xl text-orange-100 mb-8 font-light">Découvrez nos meilleurs produits aux prix les plus compétitifs</p>
-            <button class="bg-white text-orange-600 px-8 py-4 rounded-xl font-bold hover:bg-orange-50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 text-lg">
-                🔥 Voir les offres
-            </button>
-        </div>
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-black text-gray-900 mb-2">Tous nos Produits</h1>
+        <p class="text-gray-600 text-lg">Découvrez notre collection complète</p>
     </div>
 
     <!-- Filters & Search -->
-    <div class="mb-10 flex flex-col md:flex-row gap-6 items-center justify-between">
-        <div class="w-full md:w-auto">
-            <h2 class="text-3xl font-black text-gray-900">Nos Produits</h2>
-            <p class="text-orange-600 mt-2 font-semibold">{{ $products->count() }} produits disponibles</p>
-        </div>
-        
-        <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+    <div class="mb-10 bg-white rounded-2xl shadow-lg p-6">
+        <div class="flex flex-col lg:flex-row gap-6 items-center justify-between">
             <!-- Search -->
-            <div class="relative flex-1 md:w-72">
+            <div class="relative flex-1 w-full lg:max-w-md">
                 <input 
                     type="text" 
                     x-model="searchQuery"
@@ -39,34 +27,45 @@
                 </svg>
             </div>
 
-            <!-- Category Filter -->
-            <select 
-                x-model="selectedCategory"
-                @change="filterProducts()"
-                class="px-5 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 font-medium transition-all"
-            >
-                <option value="">Toutes les catégories</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
+            <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                <!-- Category Filter -->
+                <select 
+                    x-model="selectedCategory"
+                    @change="filterProducts()"
+                    class="px-5 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 font-medium transition-all"
+                >
+                    <option value="">Toutes les catégories</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
 
-            <!-- Sort -->
-            <select 
-                x-model="sortBy"
-                @change="filterProducts()"
-                class="px-5 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 font-medium transition-all"
-            >
-                <option value="name">Nom</option>
-                <option value="price_asc">Prix croissant</option>
-                <option value="price_desc">Prix décroissant</option>
-            </select>
+                <!-- Sort -->
+                <select 
+                    x-model="sortBy"
+                    @change="filterProducts()"
+                    class="px-5 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 font-medium transition-all"
+                >
+                    <option value="name">Nom</option>
+                    <option value="price_asc">Prix croissant</option>
+                    <option value="price_desc">Prix décroissant</option>
+                    <option value="newest">Plus récents</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Results Count -->
+        <div class="mt-4 pt-4 border-t-2 border-gray-100">
+            <p class="text-gray-600">
+                <span class="font-bold text-orange-600" x-text="filteredProducts.length"></span> 
+                produit(s) trouvé(s)
+            </p>
         </div>
     </div>
 
     @if($products->count() > 0)
         <!-- Products Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
             @foreach($products as $product)
             <div 
                 class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group border-2 border-transparent hover:border-orange-500"
@@ -93,13 +92,18 @@
                         <!-- Stock Badge -->
                         @if($product->stock > 0)
                             <span class="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
-                                ✓ En stock ({{ $product->stock }})
+                                ✓ En stock
                             </span>
                         @else
                             <span class="absolute top-4 right-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
                                 ✗ Rupture
                             </span>
                         @endif
+
+                        <!-- Category Badge -->
+                        <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-orange-600 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                            {{ $product->category->name }}
+                        </span>
 
                         <!-- Quick View Overlay -->
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-6">
@@ -148,20 +152,32 @@
         </div>
 
         <!-- No Results -->
-        <div x-show="filteredProducts.length === 0" class="text-center py-12">
-            <svg class="w-24 h-24 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div x-show="filteredProducts.length === 0" class="text-center py-20">
+            <svg class="w-32 h-32 mx-auto text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Aucun produit trouvé</h3>
-            <p class="text-gray-600">Essayez de modifier vos critères de recherche</p>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Aucun produit trouvé</h3>
+            <p class="text-gray-600 mb-6">Essayez de modifier vos critères de recherche</p>
+            <button @click="searchQuery = ''; selectedCategory = ''; filterProducts()" class="bg-orange-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-orange-700 transition-colors">
+                Réinitialiser les filtres
+            </button>
         </div>
+
+        <!-- Pagination -->
+        @if($products->hasPages())
+        <div class="flex justify-center">
+            <div class="bg-white rounded-2xl shadow-lg p-4">
+                {{ $products->links() }}
+            </div>
+        </div>
+        @endif
     @else
         <!-- Empty State -->
-        <div class="bg-white rounded-lg shadow-md p-12 text-center">
-            <svg class="w-24 h-24 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="bg-white rounded-2xl shadow-lg p-12 text-center">
+            <svg class="w-32 h-32 mx-auto text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
             </svg>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Aucun produit disponible</h3>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Aucun produit disponible</h3>
             <p class="text-gray-600">Les produits seront bientôt ajoutés à notre catalogue !</p>
         </div>
     @endif
@@ -171,10 +187,10 @@
 <script>
 function productList() {
     return {
-        products: @json($products),
+        products: @json($products->items()),
         searchQuery: '',
         selectedCategory: '',
-        sortBy: 'name',
+        sortBy: 'newest',
         filteredProducts: @json($products->pluck('id')),
         
         init() {
@@ -202,8 +218,10 @@ function productList() {
                 filtered.sort((a, b) => a.price - b.price);
             } else if (this.sortBy === 'price_desc') {
                 filtered.sort((a, b) => b.price - a.price);
-            } else {
+            } else if (this.sortBy === 'name') {
                 filtered.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (this.sortBy === 'newest') {
+                filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             }
             
             this.filteredProducts = filtered.map(p => p.id);
@@ -216,7 +234,6 @@ function productList() {
         async addToCart(productId, productName, productPrice) {
             const token = localStorage.getItem('auth_token');
             
-            // Check if user is logged in
             if (!token) {
                 alert('Veuillez vous connecter pour ajouter des produits au panier');
                 window.location.href = '/login';
@@ -240,10 +257,7 @@ function productList() {
                 const data = await response.json();
                 
                 if (data.success) {
-                    // Show success notification
                     this.showNotification(`✓ ${productName} ajouté au panier !`, 'success');
-                    
-                    // Trigger cart reload and count update
                     window.dispatchEvent(new CustomEvent('cart-updated'));
                 } else {
                     this.showNotification(data.message || 'Erreur lors de l\'ajout au panier', 'error');
@@ -255,7 +269,6 @@ function productList() {
         },
 
         showNotification(message, type = 'success') {
-            // Create notification element
             const notification = document.createElement('div');
             notification.className = `fixed top-24 right-6 z-50 px-6 py-4 rounded-xl shadow-2xl transform transition-all duration-300 ${
                 type === 'success' ? 'bg-green-500' : 'bg-red-500'
@@ -263,11 +276,7 @@ function productList() {
             notification.textContent = message;
             
             document.body.appendChild(notification);
-            
-            // Animate in
             setTimeout(() => notification.classList.add('translate-x-0'), 10);
-            
-            // Remove after 3 seconds
             setTimeout(() => {
                 notification.classList.add('translate-x-full', 'opacity-0');
                 setTimeout(() => notification.remove(), 300);
